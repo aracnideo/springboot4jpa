@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.aracnideo.sbhibernate.entities.Category;
 import com.aracnideo.sbhibernate.entities.Order;
+import com.aracnideo.sbhibernate.entities.OrderItem;
 import com.aracnideo.sbhibernate.entities.Product;
 import com.aracnideo.sbhibernate.entities.User;
 import com.aracnideo.sbhibernate.entities.enums.OrderStatus;
 import com.aracnideo.sbhibernate.repositories.CategoryRepository;
+import com.aracnideo.sbhibernate.repositories.OrderItemRepository;
 import com.aracnideo.sbhibernate.repositories.OrderRepository;
 import com.aracnideo.sbhibernate.repositories.ProductRepository;
 import com.aracnideo.sbhibernate.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -104,6 +109,15 @@ public class TestConfig implements CommandLineRunner {
 
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5));
+
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p2, 1, p2.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p9, 7, p9.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p7, 4, p7.getPrice());
+		OrderItem oi5 = new OrderItem(o4, p3, 5, p3.getPrice());
+		OrderItem oi6 = new OrderItem(o5, p6, 5, p6.getPrice());
+
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5, oi6));
 
 	}
 
