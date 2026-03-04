@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.aracnideo.sbhibernate.entities.Category;
 import com.aracnideo.sbhibernate.entities.Order;
 import com.aracnideo.sbhibernate.entities.OrderItem;
+import com.aracnideo.sbhibernate.entities.Payment;
 import com.aracnideo.sbhibernate.entities.Product;
 import com.aracnideo.sbhibernate.entities.User;
 import com.aracnideo.sbhibernate.entities.enums.OrderStatus;
@@ -119,6 +120,16 @@ public class TestConfig implements CommandLineRunner {
 
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5, oi6));
 
+		Payment pay1 = new Payment(null, Instant.parse("2026-02-03T14:00:00Z"), o1);
+		o1.setPayment(pay1);
+		Payment pay2 = new Payment(null, Instant.parse("2026-03-03T09:40:00Z"), o2);
+		o2.setPayment(pay2);
+		Payment pay3 = new Payment(null, Instant.parse("2026-02-03T11:55:00Z"), o3);
+		o3.setPayment(pay3);
+		Payment pay4 = new Payment(null, Instant.parse("2026-02-03T14:20:00Z"), o4);
+		o4.setPayment(pay4);
+
+		orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4));
 	}
 
 }
