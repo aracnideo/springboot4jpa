@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.aracnideo.sbhibernate.entities.User;
 import com.aracnideo.sbhibernate.repositories.UserRepository;
+import com.aracnideo.sbhibernate.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 
 	public User insert(User obj) {
